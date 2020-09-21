@@ -1,0 +1,28 @@
+{
+  "name": "ams-js",
+  "version": "1.0.0",
+  "description": "Attendance management system using face recognition",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "node server",
+    "devserver": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run devserver\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "HrushikeshAgrawal",
+  "license": "MIT",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^2.1.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.3.0",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.10",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.28",
+    "nodemon": "^2.0.4",
+    "uuid": "^8.3.0"
+  }
+}

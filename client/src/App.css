@@ -1,0 +1,366 @@
+:root {
+  --primary-theme: #00a136;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Loader */
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.loadingGif {
+  width: 100%;
+  height: 100%;
+  background: url("./assets/images/loader.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Modal */
+
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #fff;
+  border-radius: 50%;
+}
+.modal > .close:hover {
+  background: #ddd;
+}
+.popup-content {
+  width: 25vw !important;
+}
+
+/* Login Page */
+
+.login {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginDiv {
+  background-color: var(--primary-theme);
+  width: 70vw;
+  border-radius: 10px;
+  display: flex;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.left,
+.signin {
+  flex: 1;
+  text-align: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.left a {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+.left hr {
+  background-color: #fff;
+  width: 100px;
+  height: 3px;
+  margin-top: 0;
+}
+
+.left h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.left p {
+  margin-top: 5vh;
+  font-size: 24px;
+}
+
+.signin {
+  background-color: #fff;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  color: var(--primary-theme);
+}
+
+.signin form {
+  width: 100%;
+  margin-top: 3vh;
+}
+
+.signin input {
+  padding: 8px;
+  width: 50%;
+}
+
+.signin input:focus {
+  outline: none !important;
+  border: 2px solid var(--primary-theme);
+  border-radius: 5px;
+}
+
+.formRow {
+  padding: 10px;
+}
+
+.authSelector {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10vh;
+  margin-left: 5px;
+  border-bottom: solid 1px var(--primary-theme);
+}
+
+.authType {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 20px;
+}
+
+.authType:hover {
+  font-size: 22px;
+  padding: 13px 15px;
+}
+
+.selectedAuth {
+  color: #fff;
+  background-color: var(--primary-theme);
+}
+
+/* General User */
+
+.userContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  max-width: 100vw;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainDiv {
+  background-color: var(--primary-theme);
+  min-width: 70vw;
+  max-width: 90vw;
+  border-radius: 10px;
+  display: flex;
+  min-height: 70vh;
+  overflow: hidden;
+  margin: 2vh 0;
+}
+
+.leftDiv,
+.rightDiv {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.leftDiv {
+  color: #fff;
+}
+
+.rightDiv {
+  background-color: #fff;
+  color: var(--primary-theme);
+}
+
+.themeButton {
+  min-width: 100px;
+  min-height: 40px;
+  padding: 10px;
+  margin: 5px auto;
+  background-color: var(--primary-theme);
+  border: 2px solid var(--primary-theme);
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.themeButton:hover {
+  background-color: #fff;
+  color: var(--primary-theme);
+}
+
+.reverseColor {
+  background-color: #fff;
+  color: var(--primary-theme);
+}
+
+.reverseColor:hover {
+  background-color: #ddd;
+}
+
+.searchBar {
+  padding: 8px;
+}
+
+.searchBar:focus {
+  outline: none !important;
+  border: 2px solid var(--primary-theme);
+  border-radius: 5px;
+}
+
+.fa {
+  margin-right: 8px;
+}
+
+/* Student */
+
+.icon {
+  background: url("./assets/icons/user.png");
+  background-position: center;
+  background-size: cover;
+  width: 150px;
+  height: 150px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 20px;
+}
+
+/* Class Attendance */
+
+.attTable {
+  width: 60vw;
+}
+
+.rdt_TableHeader {
+  display: none !important;
+}
+
+.classDetails {
+  padding: 20px;
+}
+
+/* Student Attendance */
+
+.attCardRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.attCard {
+  background-color: var(--primary-theme);
+  width: 10vw;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+  margin: 10px 10px;
+}
+
+/* Staff details */
+
+.classInput {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.classInput select {
+  height: 40px;
+}
+
+.classInput button {
+  margin: auto 10px;
+}
+
+.classInput button:disabled {
+  background-color: #ddd;
+  color: #555;
+  border: 2px solid #555;
+  cursor: not-allowed;
+}
+
+/* Start Attendance */
+
+.dateTimeSelect {
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.subjectDiv {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.subjectDiv input {
+  padding: 5px;
+}
+
+.react-datepicker-wrapper {
+  margin: 0 10px;
+}
+
+.react-datepicker-wrapper input {
+  padding: 5px;
+  width: 100%;
+}
+
+.selectedClassName {
+  font-size: 32px;
+  font-weight: bold;
+}
