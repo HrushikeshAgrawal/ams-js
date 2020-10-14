@@ -1,4 +1,10 @@
-import { ERROR, SET_LOADING_ATT, GET_BY_CLASS, GET_BY_STUDENT } from "./types";
+import {
+  ERROR,
+  SET_LOADING_ATT,
+  GET_BY_CLASS,
+  GET_BY_STUDENT,
+  START_NEW,
+} from "./types";
 import axios from "axios";
 
 export const getByClass = (classID) => async (dispatch) => {
@@ -31,6 +37,32 @@ export const getByStudent = (studentID) => async (dispatch) => {
       },
     });
     return res.data;
+  } catch (err) {
+    dispatch({
+      type: ERROR,
+      payload: err.response.data.error,
+    });
+    return err.response.data;
+  }
+};
+
+export const startNewAttendance = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_LOADING_ATT });
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    };
+    const res = await axios.post(`/attendance/addAttendance`, body, {
+      headers: headers,
+    });
+    if (res.data.success === true) {
+      dispatch({
+        type: START_NEW,
+      });
+      return res.data;
+    }
   } catch (err) {
     dispatch({
       type: ERROR,

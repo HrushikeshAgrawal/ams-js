@@ -228,6 +228,7 @@ html {
   cursor: pointer;
   display: flex;
   justify-content: center;
+  outline: none;
 }
 
 .themeButton:hover {
@@ -363,4 +364,62 @@ html {
 .selectedClassName {
   font-size: 32px;
   font-weight: bold;
+}
+
+.markAttTable {
+  border: solid 1px #000;
+  width: 100%;
+  color: #000;
+  padding: 10px;
+}
+
+.markAttTable thead {
+  font-size: 18px;
+}
+
+.markAttTable button {
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 8px;
+}
+
+.markAttTable .present {
+  background-color: #28a745;
+  border: solid 1px #28a745;
+}
+
+.markAttTable .absent {
+  background-color: #dc3545;
+  border: solid 1px #dc3545;
+}
+
+.studentRow {
+  margin: 10px auto;
+  padding: 30px;
+}
+
+.stuPresent {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.stuAbsent {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btnRow {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.btnRow .redBtn {
+  background-color: #dc3545;
+  border: 2px solid #dc3545;
+  margin-left: 10px;
+}
+
+.btnRow .redBtn:hover {
+  background-color: #fff;
+  color: #dc3545;
 }

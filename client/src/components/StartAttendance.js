@@ -6,23 +6,28 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { loadUser } from "../redux/actions/authActions";
 import { getAllClasses, getAllStudents } from "../redux/actions/viewActions";
+import { startNewAttendance } from "../redux/actions/attendanceActions";
 import Loader from "./Loader";
 
 const Staff = ({
   user,
   loading,
+  loading2,
   getAllClasses,
   allClasses,
   loadUser,
   getAllStudents,
   allStudents,
+  startNewAttendance,
 }) => {
   const [viewClassID, setViewClassID] = useState("");
   const [selectedClass, setSelectedClass] = useState({});
   const [classStudents, setClassStudents] = useState([]);
+  const [subject, setSubject] = useState("");
   const [lectureDate, setLectureDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+  const [newAttArr, setNewAttArr] = useState([]);
   const [buttonDisable, setButtonDisable] = useState(true);
   const history = useHistory();
   useEffect(() => {
@@ -45,15 +50,55 @@ const Staff = ({
       temp.studentsArr.forEach((studentID) => {
         stuArr.push(allStudents.find((stu) => stu.studentID === studentID));
       });
+      const tempAttArr = new Array(stuArr.length).fill(0);
+      setNewAttArr(tempAttArr);
       setClassStudents(stuArr);
       setSelectedClass(temp);
     }
     // eslint-disable-next-line
   }, [viewClassID]);
 
+  const changeAttendance = (index, value) => {
+    setNewAttArr(
+      newAttArr.map((item, i) => {
+        return i === index ? value : item;
+      })
+    );
+  };
+
+  const fillAttendance = (value) => {
+    setNewAttArr(newAttArr.map((item) => value));
+  };
+
+  const addAttendance = async () => {
+    let body = {};
+    body.classID = viewClassID;
+    let month = lectureDate.getMonth() + 1;
+    body.date =
+      lectureDate.getDate() + "/" + month + "/" + lectureDate.getFullYear();
+    body.startTime = startTime.toLocaleString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    body.endTime = endTime.toLocaleString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+    body.subject = subject;
+    body.staffInchargeID = user.staffID;
+    body.staffTakingID = user.staffID;
+    body.attendanceArr = newAttArr;
+    const res = await startNewAttendance(body);
+    if (res.success === true) {
+      history.push("/staff");
+    }
+  };
+
   return (
     <div className="userContainer">
-      {loading || user === null ? (
+      {loading || loading2 || user === null ? (
         <Loader />
       ) : (
         <div className="mainDiv">
@@ -107,7 +152,12 @@ const Staff = ({
               </div>
             </div>
             <div className="subjectDiv">
-              <input type="text" placeholder="Subject Name" />
+              <input
+                type="text"
+                placeholder="Subject Name"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+              />
               <p>Conducted By: {user.initials}</p>
             </div>
           </div>
@@ -117,12 +167,79 @@ const Staff = ({
             ) : (
               <>
                 <p className="selectedClassName">{selectedClass.className}</p>
-                {selectedClass.studentsArr &&
-                  classStudents.map((student) => (
-                    <div key={student.studentID} className="stuList">
-                      <p>{student.rollNo}</p>
-                    </div>
-                  ))}
+                <div className="btnRow">
+                  <button
+                    className="themeButton"
+                    onClick={() => fillAttendance(1)}
+                  >
+                    All Present
+                  </button>
+                  <button
+                    className="themeButton redBtn"
+                    onClick={() => fillAttendance(0)}
+                  >
+                    All Absent
+                  </button>
+                </div>
+                <table className="markAttTable" cellSpacing="0" cellPadding="5">
+                  <thead>
+                    <tr>
+                      <td>Student Name</td>
+                      <td>Student RollNo</td>
+                      <td>Mark Present</td>
+                      <td>Mark Absent</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedClass.studentsArr &&
+                      classStudents.map((student, index) => (
+                        <tr key={student.studentID} className="studentRow">
+                          <td
+                            className={
+                              newAttArr[index] === 1
+                                ? "stuPresent"
+                                : "stuAbsent"
+                            }
+                          >
+                            {student.fullName.firstName}{" "}
+                            {student.fullName.lastName}
+                          </td>
+                          <td
+                            className={
+                              newAttArr[index] === 1
+                                ? "stuPresent"
+                                : "stuAbsent"
+                            }
+                          >
+                            {student.rollNo}
+                          </td>
+                          <td>
+                            <button
+                              className="present"
+                              onClick={() => changeAttendance(index, 1)}
+                            >
+                              P
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              className="absent"
+                              onClick={() => changeAttendance(index, 0)}
+                            >
+                              A
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+                <button
+                  style={{ marginTop: "10px" }}
+                  className="themeButton"
+                  onClick={addAttendance}
+                >
+                  Add Attendance
+                </button>
               </>
             )}
           </div>
@@ -135,6 +252,7 @@ const Staff = ({
 const mapStateToProps = (state) => ({
   user: state.auth.user,
   loading: state.auth.loading,
+  loading2: state.attendance.loading,
   allClasses: state.view.allClasses,
   allStudents: state.view.allStudents,
 });
@@ -143,4 +261,5 @@ export default connect(mapStateToProps, {
   loadUser,
   getAllClasses,
   getAllStudents,
+  startNewAttendance,
 })(Staff);
