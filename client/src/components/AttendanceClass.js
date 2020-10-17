@@ -43,7 +43,6 @@ const AttendanceClass = ({
     let finalArr = [];
     let studentsInfo = {};
     if (filteredClassAttendance && _class && allStudents) {
-      console.log("AALLL: ", allStudents);
       allStudents.forEach((student) => {
         studentsInfo[student.studentID] = {
           fullName: student.fullName,

@@ -4,6 +4,7 @@ import {
   VIEW_CLASS,
   GET_ALL_STUDENTS,
   GET_ALL_CLASSES,
+  GET_ALL_STAFF,
 } from "../actions/types";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   loading: true,
   allStudents: [],
   allClasses: [],
+  allStaff: [],
   _class: null,
 };
 
@@ -32,6 +34,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allClasses: action.payload,
+        loading: false,
+      };
+    case GET_ALL_STAFF:
+      return {
+        ...state,
+        allStaff: action.payload,
         loading: false,
       };
     case SET_LOADING_VIEW:

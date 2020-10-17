@@ -4,6 +4,7 @@ import {
   VIEW_CLASS,
   GET_ALL_STUDENTS,
   GET_ALL_CLASSES,
+  GET_ALL_STAFF,
 } from "./types";
 import axios from "axios";
 
@@ -50,6 +51,24 @@ export const getAllClasses = () => async (dispatch) => {
     dispatch({
       type: GET_ALL_CLASSES,
       payload: res.data.classes,
+    });
+    return res.data;
+  } catch (err) {
+    dispatch({
+      type: ERROR,
+      payload: err.response.data.error,
+    });
+    return err.response.data;
+  }
+};
+
+export const getAllStaff = () => async (dispatch) => {
+  try {
+    dispatch({ type: SET_LOADING_VIEW });
+    const res = await axios.get(`/view/getAllStaff`);
+    dispatch({
+      type: GET_ALL_STAFF,
+      payload: res.data.staff,
     });
     return res.data;
   } catch (err) {

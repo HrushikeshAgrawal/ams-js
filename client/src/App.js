@@ -11,6 +11,9 @@ import Admin from "./components/Admin";
 import AttendanceClass from "./components/AttendanceClass";
 import AttendanceStudent from "./components/AttendanceStudent";
 import StartAttendance from "./components/StartAttendance";
+import AllClasses from "./components/Admin/AllClasses";
+import AllStudents from "./components/Admin/AllStudents";
+import AllStaff from "./components/Admin/AllStaff";
 
 const App = () => {
   return (
@@ -33,6 +36,9 @@ const App = () => {
               component={AttendanceClass}
             />
             <Route exact path="/attendance/start" component={StartAttendance} />
+            <Route exact path="/admin/students" component={AllStudents} />
+            <Route exact path="/admin/staff" component={AllStaff} />
+            <Route exact path="/admin/classes" component={AllClasses} />
           </Switch>
         </div>
       </Router>

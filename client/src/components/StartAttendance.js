@@ -160,6 +160,13 @@ const Staff = ({
               />
               <p>Conducted By: {user.initials}</p>
             </div>
+            <button
+              style={{ marginTop: "20px" }}
+              className="themeButton reverseColor"
+              onClick={() => history.goBack()}
+            >
+              <i className="fa fa-chevron-circle-left"></i> Back
+            </button>
           </div>
           <div className="rightDiv">
             {viewClassID === "" ? (
