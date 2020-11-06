@@ -17,3 +17,9 @@ export const SET_LOADING_ATT = "SET_LOADING_ATT";
 export const GET_BY_CLASS = "GET_BY_CLASS";
 export const GET_BY_STUDENT = "GET_BY_STUDENT";
 export const START_NEW = "START_NEW";
+
+// Add actions
+export const SET_LOADING_ADD = "SET_LOADING_ADD";
+export const ADD_STUDENT = "ADD_STUDENT";
+export const ADD_STAFF = "ADD_STAFF";
+export const ADD_CLASS = "ADD_CLASS";

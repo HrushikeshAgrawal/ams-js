@@ -13,37 +13,41 @@ const AllClasses = ({ allClasses, getAllClasses, loading }) => {
     // eslint-disable-next-line
   }, []);
 
-  const columns = useMemo(() => [
-    {
-      name: "Class ID",
-      selector: "classID",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Class Name",
-      selector: "className",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Students Count",
-      selector: "studentsArr.length",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "View Attendance",
-      cell: (row) => (
-        <button
-          onClick={() => history.push(`/attendance/class/${row.classID}`)}
-        >
-          View
-        </button>
-      ),
-      button: true,
-    },
-  ]);
+  const columns = useMemo(
+    () => [
+      {
+        name: "Class ID",
+        selector: "classID",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Class Name",
+        selector: "className",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Students Count",
+        selector: "studentsArr.length",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "View Attendance",
+        cell: (row) => (
+          <button
+            onClick={() => history.push(`/attendance/class/${row.classID}`)}
+          >
+            View
+          </button>
+        ),
+        button: true,
+      },
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div className="userContainer">
@@ -60,13 +64,22 @@ const AllClasses = ({ allClasses, getAllClasses, loading }) => {
               paginationPerPage={10}
               paginationRowsPerPageOptions={[5, 10, 20]}
             />
-            <button
-              style={{ marginTop: "20px" }}
-              className="themeButton reverseColor"
-              onClick={() => history.goBack()}
-            >
-              <i className="fa fa-chevron-circle-left"></i> Back
-            </button>
+            <div className="options">
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.goBack()}
+              >
+                <i className="fa fa-chevron-circle-left"></i> Back
+              </button>
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.push("/admin/addClass")}
+              >
+                <i className="fa fa-user-plus"></i> Add New Class
+              </button>
+            </div>
           </div>
         </div>
       )}

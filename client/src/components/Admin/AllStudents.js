@@ -13,50 +13,54 @@ const AllStudents = ({ allStudents, getAllStudents, loading }) => {
     // eslint-disable-next-line
   }, []);
 
-  const columns = useMemo(() => [
-    {
-      name: "Roll No",
-      selector: "rollNo",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Name",
-      selector: (row) => {
-        return row.fullName.firstName + " " + row.fullName.lastName;
+  const columns = useMemo(
+    () => [
+      {
+        name: "Roll No",
+        selector: "rollNo",
+        sortable: true,
+        center: true,
       },
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Email ID",
-      selector: "email",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "View Attendance",
-      cell: (row) => (
-        <button
-          onClick={() => history.push(`/attendance/student/${row.studentID}`)}
-        >
-          View
-        </button>
-      ),
-      button: true,
-    },
-    {
-      name: "View Class",
-      cell: (row) => (
-        <button
-          onClick={() => history.push(`/attendance/class/${row.classID}`)}
-        >
-          View
-        </button>
-      ),
-      button: true,
-    },
-  ]);
+      {
+        name: "Name",
+        selector: (row) => {
+          return row.fullName.firstName + " " + row.fullName.lastName;
+        },
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Email ID",
+        selector: "email",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "View Attendance",
+        cell: (row) => (
+          <button
+            onClick={() => history.push(`/attendance/student/${row.studentID}`)}
+          >
+            View
+          </button>
+        ),
+        button: true,
+      },
+      {
+        name: "View Class",
+        cell: (row) => (
+          <button
+            onClick={() => history.push(`/attendance/class/${row.classID}`)}
+          >
+            View
+          </button>
+        ),
+        button: true,
+      },
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div className="userContainer">
@@ -73,13 +77,22 @@ const AllStudents = ({ allStudents, getAllStudents, loading }) => {
               paginationPerPage={10}
               paginationRowsPerPageOptions={[5, 10, 20]}
             />
-            <button
-              style={{ marginTop: "20px" }}
-              className="themeButton reverseColor"
-              onClick={() => history.goBack()}
-            >
-              <i className="fa fa-chevron-circle-left"></i> Back
-            </button>
+            <div className="options">
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.goBack()}
+              >
+                <i className="fa fa-chevron-circle-left"></i> Back
+              </button>
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.push("/admin/addStudent")}
+              >
+                <i className="fa fa-user-plus"></i> Add New Student
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -244,6 +244,7 @@ const Staff = ({
                   style={{ marginTop: "10px" }}
                   className="themeButton"
                   onClick={addAttendance}
+                  disabled={buttonDisable}
                 >
                   Add Attendance
                 </button>

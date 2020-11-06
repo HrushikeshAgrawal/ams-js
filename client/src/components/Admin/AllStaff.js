@@ -13,32 +13,36 @@ const AllStaff = ({ allStaff, getAllStaff, loading }) => {
     // eslint-disable-next-line
   }, []);
 
-  const columns = useMemo(() => [
-    {
-      name: "Staff ID",
-      selector: "staffID",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Name",
-      selector: "staffName",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Initials",
-      selector: "initials",
-      sortable: true,
-      center: true,
-    },
-    {
-      name: "Email ID",
-      selector: "email",
-      sortable: true,
-      center: true,
-    },
-  ]);
+  const columns = useMemo(
+    () => [
+      {
+        name: "Staff ID",
+        selector: "staffID",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Name",
+        selector: "staffName",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Initials",
+        selector: "initials",
+        sortable: true,
+        center: true,
+      },
+      {
+        name: "Email ID",
+        selector: "email",
+        sortable: true,
+        center: true,
+      },
+    ],
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <div className="userContainer">
@@ -55,13 +59,22 @@ const AllStaff = ({ allStaff, getAllStaff, loading }) => {
               paginationPerPage={10}
               paginationRowsPerPageOptions={[5, 10, 20]}
             />
-            <button
-              style={{ marginTop: "20px" }}
-              className="themeButton reverseColor"
-              onClick={() => history.goBack()}
-            >
-              <i className="fa fa-chevron-circle-left"></i> Back
-            </button>
+            <div className="options">
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.goBack()}
+              >
+                <i className="fa fa-chevron-circle-left"></i> Back
+              </button>
+              <button
+                style={{ marginTop: "20px" }}
+                className="themeButton reverseColor"
+                onClick={() => history.push("/admin/addStaff")}
+              >
+                <i className="fa fa-user-plus"></i> Add New Staff
+              </button>
+            </div>
           </div>
         </div>
       )}

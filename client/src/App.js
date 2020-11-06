@@ -14,6 +14,9 @@ import StartAttendance from "./components/StartAttendance";
 import AllClasses from "./components/Admin/AllClasses";
 import AllStudents from "./components/Admin/AllStudents";
 import AllStaff from "./components/Admin/AllStaff";
+import AddClass from "./components/Admin/AddClass";
+import AddStudent from "./components/Admin/AddStudent";
+import AddStaff from "./components/Admin/AddStaff";
 
 const App = () => {
   return (
@@ -39,6 +42,9 @@ const App = () => {
             <Route exact path="/admin/students" component={AllStudents} />
             <Route exact path="/admin/staff" component={AllStaff} />
             <Route exact path="/admin/classes" component={AllClasses} />
+            <Route exact path="/admin/addClass" component={AddClass} />
+            <Route exact path="/admin/addStudent" component={AddStudent} />
+            <Route exact path="/admin/addStaff" component={AddStaff} />
           </Switch>
         </div>
       </Router>
