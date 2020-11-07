@@ -1,0 +1,5 @@
+{
+    "jwtSecret": "jhaveirg",
+    "mongoUri": "mongodb+srv://admin:admin123@utopia-stores.jcz9s.mongodb.net/sqta1?retryWrites=true&w=majority"
+  }
+  

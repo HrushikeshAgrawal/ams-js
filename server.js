@@ -9,7 +9,7 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.send("HEY! :D");
+  res.send("Server Started");
 });
 
 app.use("/auth", require("./routes/auth"));

@@ -6,6 +6,7 @@ const Student = require("../models/Student");
 const Class = require("../models/Class");
 const Staff = require("../models/Staff");
 const Admin = require("../models/Admin");
+const Attendance = require("../models/Attendance");
 
 exports.addStudent = async (req, res, next) => {
   const { classID, rollNo, firstName, lastName, email, password } = req.body;
@@ -130,12 +131,12 @@ exports.addStaff = async (req, res, next) => {
 exports.addAdmin = async (req, res, next) => {
   const { adminName, email, password, secret } = req.body;
   try {
-    if (secret !== "swoosh +.+") {
-      return res.json({
-        success: false,
-        error: "Invalid Secret. Go away! >:(",
-      });
-    }
+    // if (secret !== "swoosh +.+") {
+    //   return res.json({
+    //     success: false,
+    //     error: "Invalid Secret. Go away! >:(",
+    //   });
+    // }
     let admin = await Admin.findOne({ email });
     if (admin) {
       return res
@@ -168,6 +169,45 @@ exports.addAdmin = async (req, res, next) => {
         return res.json({ success: true, token, admin });
       }
     );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ success: false, error: "Server error" });
+  }
+};
+
+exports.addClass = async (req, res, next) => {
+  const { className } = req.body;
+  try {
+    let _class = await Class.findOne({ className });
+    if (_class) {
+      return res
+        .status(400)
+        .json({ success: false, error: "ClassName already taken." });
+    }
+    const all = await Class.find();
+    let count = all.length + 1;
+    count = ("000" + count).slice(-4);
+    const classID = "C" + count;
+    _class = new Class({
+      classID,
+      className,
+    });
+    await _class.save();
+    return res.json({ success: true, _class });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ success: false, error: "Server error" });
+  }
+};
+
+exports.clearDB = async (req, res, next) => {
+  try {
+    await Student.deleteMany({});
+    await Staff.deleteMany({});
+    await Admin.deleteMany({});
+    await Class.deleteMany({});
+    await Attendance.deleteMany({});
+    res.json({ success: true, msg: "Database Cleared" });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ success: false, error: "Server error" });
